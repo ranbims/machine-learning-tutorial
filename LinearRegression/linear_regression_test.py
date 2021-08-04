@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Tuple
+import linear_regression_model
 
 def loadTrainingData() -> Tuple[List[float], List[float]]:
     X = []
@@ -26,6 +27,12 @@ def main():
     X, Y = toNumpyArray(X_raw, Y_raw)
     plotData(X, Y)
     pass
+
+def test_main():
+    X_raw, Y_raw = loadTrainingData()
+    X, Y = toNumpyArray(X_raw, Y_raw)
+    model_parameters = linear_regression_model.learn(X, Y)
+    print(model_parameters)
 
 if __name__ == "__main__":
     main()
