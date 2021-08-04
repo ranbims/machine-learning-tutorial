@@ -1,7 +1,4 @@
-from typing_extensions import ParamSpec
-from matplotlib.pyplot import axis
 import numpy as np
-from numpy.core.shape_base import block
 from plotutils import PlotInstance
 
 def initialize_parameters(w: float, b: float) -> dict:
@@ -26,10 +23,11 @@ def updateParameters(parameters: dict, X: np.ndarray, A: np.ndarray, Y: np.ndarr
     parameters["b"] = b_new
 
 def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 1000) -> dict:
-    w = 0
+    w = 10
     b = 0
     parameters = initialize_parameters(w, b)
     plotInstance = PlotInstance()
+    plotInstance.start_ploting()
     for i in range(iteration):
         A = predict(X, parameters)
         cost = computeCost(A, Y)
