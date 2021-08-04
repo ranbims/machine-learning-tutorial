@@ -31,8 +31,8 @@ def main():
 def test_main():
     X_raw, Y_raw = loadTrainingData()
     X, Y = toNumpyArray(X_raw, Y_raw)
-    model_parameters = linear_regression_model.learn(X, Y)
+    model_parameters = linear_regression_model.learn(X, Y, learning_rate = 0.0004)
     print(model_parameters)
 
 if __name__ == "__main__":
-    main()
+    test_main()

@@ -1,6 +1,8 @@
 from typing_extensions import ParamSpec
 from matplotlib.pyplot import axis
 import numpy as np
+from numpy.core.shape_base import block
+from plotutils import PlotInstance
 
 def initialize_parameters(w: float, b: float) -> dict:
     return {"w": w, "b": b}
@@ -19,17 +21,23 @@ def updateParameters(parameters: dict, X: np.ndarray, A: np.ndarray, Y: np.ndarr
     b = parameters["b"]
     m = A.shape[0]
     w_new = w - np.sum((A - Y) * X) / m * learning_rate
-    b_new = b - np.sum(A - Y) / m * learning_rate
+    b_new = b - np.sum((A - Y)) / m * learning_rate
     parameters["w"] = w_new
     parameters["b"] = b_new
 
-def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0003, iteration = 1000000) -> dict:
+def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 1000) -> dict:
     w = 0
     b = 0
     parameters = initialize_parameters(w, b)
+    plotInstance = PlotInstance()
     for i in range(iteration):
         A = predict(X, parameters)
         cost = computeCost(A, Y)
         print(cost)
         updateParameters(parameters, X, A, Y, learning_rate)
+        w = parameters["w"]
+        b = parameters["b"]
+        print("w = {}, b = {}".format(w, b))
+        plotInstance.plot(lambda x: x * w + b, 0, 100, 0, 1000)
+    plotInstance.finish_ploting()
     return parameters
