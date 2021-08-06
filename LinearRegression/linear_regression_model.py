@@ -23,7 +23,7 @@ def updateParameters(parameters: dict, X: np.ndarray, A: np.ndarray, Y: np.ndarr
     parameters["b"] = b_new
 
 def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 1000) -> dict:
-    w = 10
+    w = 0
     b = 0
     parameters = initialize_parameters(w, b)
     plotInstance = PlotInstance()
@@ -36,6 +36,6 @@ def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 1000
         w = parameters["w"]
         b = parameters["b"]
         print("w = {}, b = {}".format(w, b))
-        plotInstance.plot(lambda x: x * w + b, 0, 100, 0, 1000)
+        plotInstance.plot(lambda x: x * w + b, 0, 100, 0, 1000, 'b')
     plotInstance.finish_ploting()
     return parameters
