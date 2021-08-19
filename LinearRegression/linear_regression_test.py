@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import linear_regression_model
+import linear_regression_scipy
 from typing import List, Tuple
 
 def loadTrainingData() -> Tuple[List[float], List[float]]:
@@ -27,5 +29,18 @@ def main():
     plotData(X, Y)
     pass
 
+def test_main():
+    X_raw, Y_raw = loadTrainingData()
+    X, Y = toNumpyArray(X_raw, Y_raw)
+    model_parameters = linear_regression_model.learn(X, Y, learning_rate=0.00036, iteration=200000, plot=True)
+    print(model_parameters)
+
+def test_scipy():
+    X, Y = loadTrainingData()
+    model_parameters = linear_regression_scipy.learn(X, Y)
+    print('w = {}, b = {}'.format(model_parameters["w"], model_parameters["b"]))
+
 if __name__ == "__main__":
-    main()
+    # main()
+    test_main()
+    # test_scipy()
