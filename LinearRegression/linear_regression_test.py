@@ -32,7 +32,7 @@ def main():
 def test_main():
     X_raw, Y_raw = loadTrainingData()
     X, Y = toNumpyArray(X_raw, Y_raw)
-    model_parameters = linear_regression_model.learn(X, Y, learning_rate = 0.00001)
+    model_parameters = linear_regression_model.learn(X, Y, learning_rate=0.00036, iteration=200000, plot=True)
     print(model_parameters)
 
 def test_scipy():
@@ -41,4 +41,6 @@ def test_scipy():
     print('w = {}, b = {}'.format(model_parameters["w"], model_parameters["b"]))
 
 if __name__ == "__main__":
-    test_scipy()
+    # main()
+    test_main()
+    # test_scipy()

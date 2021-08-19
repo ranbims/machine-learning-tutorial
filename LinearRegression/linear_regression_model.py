@@ -1,5 +1,6 @@
 import numpy as np
 from plotutils import PlotInstance
+import matplotlib.pyplot as plt
 
 def initialize_parameters(w: float, b: float) -> dict:
     return {"w": w, "b": b}
@@ -22,12 +23,14 @@ def updateParameters(parameters: dict, X: np.ndarray, A: np.ndarray, Y: np.ndarr
     parameters["w"] = w_new
     parameters["b"] = b_new
 
-def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 1000) -> dict:
+def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 10000, plot = True) -> dict:
     w = 0
     b = 0
     parameters = initialize_parameters(w, b)
-    plotInstance = PlotInstance()
-    plotInstance.start_ploting()
+    if (plot):
+        plotInstance = PlotInstance()
+        plotInstance.start_ploting()
+        plt.plot(X, Y, 'ro')
     for i in range(iteration):
         A = predict(X, parameters)
         cost = computeCost(A, Y)
@@ -36,6 +39,8 @@ def learn(X: np.ndarray, Y: np.ndarray, learning_rate = 0.0001, iteration = 1000
         w = parameters["w"]
         b = parameters["b"]
         print("w = {}, b = {}".format(w, b))
-        plotInstance.plot(lambda x: x * w + b, 0, 100, 0, 1000, 'b')
-    plotInstance.finish_ploting()
+        if (plot):
+            plotInstance.plot(lambda x: x * w + b, 0, 150, 0, 1500, 'b')
+    if (plot):
+        plotInstance.finish_ploting()
     return parameters
